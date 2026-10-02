@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petualangan Matematika Kelas IV SD/MI</title>
+    <!-- Fonts Google untuk tampilan ramah anak -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* === DESAIN CSS UTAMA (DESAIN CERAH, RAMAH ANAK & RESPANSIF) === */
+        :root {
+            --primary: #4e54c8;
+            --primary-light: #8f94fb;
+            --secondary: #ff9f43;
+            --success: #1dd1a1;
+            --danger: #ff6b6b;
+            --warning: #feca57;
+            --info: #48dbfb;
+            --purple: #9b59b6;
+            --bg-main: #f4f7fe;
+            --card-bg: #ffffff;
+            --text-color: #2d3436;
+            --text-muted: #636e72;
+            --border-radius: 18px;
+            --shadow: 0 8px 20px rgba(0,0,0,0.06);
+            --shadow-hover: 0 12px 28px rgba(0,0,0,0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Nunito', 'Quicksand', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Container & Navigation */
+        .app-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(78, 84, 200, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .logo-icon {
+            background: var(--warning);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+        }
+
+        .user-nav-badge {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 1.5rem;
+            flex: 1;
+        }
+
+        /* Screen Wrapper */
+        .screen {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Common Elements */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+            border: 2px solid rgba(0,0,0,0.03);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            padding: 0.8rem 1.6rem;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(78, 84, 200, 0.25);
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(78, 84, 200, 0.35);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #10ac84, #1dd1a1);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #ff9f43, #feca57);
+            color: #2d3436;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        /* Form Controls */
+        .form-group {
+            margin-bottom: 1.2rem;
+            text-align: left;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border: 2px solid #dfe6e9;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+            outline: none;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+        }
+
+        /* Login Screen */
+        .login-card {
+            max-width: 480px;
+            margin: 2rem auto;
+            text-align: center;
+            padding: 2.5rem 2rem;
+            border-top: 6px solid var(--primary);
+        }
+
+        .login-hero-img {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Dashboard */
+        .welcome-card {
+            background: linear-gradient(135deg, #a8c0ff, #3f2b96);
+            color: white;
+            border-radius: var(--border-radius);
+            padding: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .progress-bar-container {
+            background: rgba(255, 255, 255, 0.25);
+            height: 12px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 8px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .progress-bar-fill {
+            background: var(--warning);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .grid-menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .menu-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            border: 3px solid transparent;
+            transition: all 0.25s ease;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .menu-card.bilangan { border-color: var(--info); }
+        .menu-card.aljabar { border-color: var(--warning); }
+        .menu-card.pengukuran { border-color: var(--success); }
+        .menu-card.geometri { border-color: var(--purple); }
+
+        .menu-card-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-card-title {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            margin-bottom: 0.3rem;
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.8rem;
+        }
+
+        /* Material View */
+        .submaterial-nav {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            margin-bottom: 1.2rem;
+            scrollbar-width: thin;
+        }
+
+        .submat-btn {
+            background: #eef2f5;
+            color: var(--text-color);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .submat-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .interactive-box {
+            background: #f8f9fa;
+            border: 2px dashed #cbd5e1;
+            border-radius: 14px;
+            padding: 1.2rem;
+            margin: 1rem 0;
+        }
+
+        .option-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .option-btn {
+            background: white;
+            border: 2px solid #e2e8f0;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .option-btn:hover {
+            border-color: var(--primary);
+            background: #f0f3ff;
+        }
+
+        .feedback-msg {
+            margin-top: 10px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-weight: 700;
+            display: none;
+        }
+
+        .feedback-msg.correct {
+            background: #d1fae5;
+            color: #065f46;
+            display: block;
+        }
+
+        .feedback-msg.wrong {
+            background: #fee2e2;
+            color: #991b1b;
+            display: block;
+        }
+
+        /* Visual CSS Elements */
+        .place-value-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .place-value-table th, .place-value-table td {
+            border: 2px solid #cbd5e1;
+            padding: 8px;
+        }
+
+        .place-value-table th {
+            background: #e2e8f0;
+        }
+
+        .css-ruler {
+            width: 100%;
+            height: 50px;
+            background: #feca57;
+            border-radius: 6px;
+            border: 2px solid #e58e26;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            padding: 0 10px 5px 10px;
+            font-weight: bold;
+            box-shadow: inset 0 -4px 0 rgba(0,0,0,0.1);
+        }
+
+        .css-ruler-mark {
+            height: 15px;
+            width: 2px;
+            background: #2d3436;
+        }
+
+        .css-scale-balance {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 30px;
+            margin: 15px 0;
+            height: 100px;
+            position: relative;
+        }
+
+        .scale-plate {
+            width: 80px;
+            height: 60px;
+            background: #dfe6e9;
+            border: 3px solid #b2bec3;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .shape-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .shape-item {
+            background: #f1f2f6;
+            padding: 12px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .svg-shape {
+            width: 60px;
+            height: 60px;
+        }
+
+        /* Quiz Page */
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .quiz-progress-badge {
+            background: var(--primary-light);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+        }
+
+        .quiz-option-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 1.5rem 0;
+        }
+
+        .quiz-option {
+            background: white;
+            border: 2px solid #e2e8f0;
+            padding: 1rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--primary);
+            background: #f0f3ff;
+        }
+
+        .quiz-option.selected {
+            border-color: var(--primary);
+            background: #e0e7ff;
+        }
+
+        .opt-letter {
+            width: 28px;
+            height: 28px;
+            background: #cbd5e1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: 800;
+        }
+
+        .quiz-option.selected .opt-letter {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Result & Discussion */
+        .result-box {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .score-circle {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--purple));
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem auto;
+            box-shadow: 0 8px 20px rgba(78, 84, 200, 0.3);
+        }
+
+        .score-number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .result-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 1.5rem 0;
+        }
+
+        .stat-card {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 12px;
+            font-weight: 700;
+        }
+
+        .discussion-item {
+            border-bottom: 2px solid #f1f2f6;
+            padding: 1rem 0;
+        }
+
+        .discussion-item:last-child {
+            border-bottom: none;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .badge-success { background: #d1fae5; color: #065f46; }
+        .badge-danger { background: #fee2e2; color: #991b1b; }
+
+        /* Navigation Bottom Bar / Back Button */
+        .nav-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 1.5rem;
+        }
+
+        /* Footer */
+        .app-footer {
+            text-align: center;
+            padding: 1rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid #e2e8f0;
+            background: white;
+            margin-top: auto;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 600px) {
+            .container { padding: 1rem; }
+            .welcome-card { flex-direction: column; text-align: center; }
+            .progress-bar-container { max-width: 100%; }
+            .nav-actions { flex-direction: column; }
+            .btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER APLIKASI -->
+    <header class="app-header">
+        <div class="logo-container">
+            <div class="logo-icon">📐</div>
+            <span>Petualangan Mat-4</span>
+        </div>
+        <div class="user-nav-badge" id="userBadge">Siswa: -</div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="container">
+
+        <!-- 1. HALAMAN LOGIN -->
+        <section id="loginScreen" class="screen active">
+            <div class="card login-card">
+                <div class="login-hero-img">🚀</div>
+                <h1 style="color: var(--primary); font-weight: 800; margin-bottom: 0.5rem;">Petualangan Matematika</h1>
+                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Kelas IV SD/MI — Seru, Interaktif & Edukatif!</p>
+                
+                <form id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label class="form-label" for="studentName">Nama Lengkap Siswa:</label>
+                        <input type="text" id="studentName" class="form-control" placeholder="Masukkan namamu..." required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="studentClass">Kelas / Sekolah:</label>
+                        <input type="text" id="studentClass" class="form-control" placeholder="Contoh: IV-A SD Melati" required>
+                    </div>
+                    <button type="submit" class="btn btn-block" style="font-size: 1.1rem; padding: 1rem;">
+                        🎮 Mulai Petualangan!
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- 2. DASHBOARD / MENU UTAMA -->
+        <section id="dashboardScreen" class="screen">
+            <div class="welcome-card">
+                <div>
+                    <h2 id="welcomeText" style="font-size: 1.5rem;">Halo, Teman! 👋</h2>
+                    <p style="opacity: 0.9;">Siap petualangan belajar matematika hari ini?</p>
+                </div>
+                <div style="min-width: 200px;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700;">
+                        <span>Progress Belajar</span>
+                        <span id="progressText">0%</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div id="progressBar" class="progress-bar-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin-bottom: 1rem; color: var(--text-color);">📚 Pilih Topik Materi:</h3>
+            <div class="grid-menu">
+                <div class="menu-card bilangan" onclick="openTopic('bilangan')">
+                    <div class="menu-card-icon">🔢</div>
+                    <div class="menu-card-title">1. Bilangan</div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Cacah sampai 10.000, nilai tempat, mengurutkan.</p>
+                </div>
+                <div class="menu-card aljabar" onclick="openTopic('aljabar')">
+                    <div class="menu-card-icon">➕</div>
+                    <div class="menu-card-title">2. Aljabar</div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Kalimat matematika & tebak nilai kotak (□).</p>
+                </div>
+                <div class="menu-card pengukuran" onclick="openTopic('pengukuran')">
+                    <div class="menu-card-icon">📏</div>
+                    <div class="menu-card-title">3. Pengukuran</div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Panjang & Berat, alat ukur penggaris/timbangan.</p>
+                </div>
+                <div class="menu-card geometri" onclick="openTopic('geometri')">
+                    <div class="menu-card-icon">🔷</div>
+                    <div class="menu-card-title">4. Geometri</div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Bangun datar, segiempat, segitiga & ciri-cirinya.</p>
+                </div>
+            </div>
+
+            <h3 style="margin-bottom: 1rem; color: var(--text-color);">🎯 Menu Utama:</h3>
+            <div class="nav-grid">
+                <button class="btn btn-secondary" onclick="showScreen('activityScreen')">🎮 Aktivitas</button>
+                <button class="btn btn-warning" onclick="startQuiz()">📝 Kuis SD</button>
+                <button class="btn btn-success" onclick="showScreen('resultScreen')">🏆 Hasil Belajar</button>
+                <button class="btn btn-outline" onclick="showScreen('guideScreen')">💡 Petunjuk</button>
+                <button class="btn btn-outline" onclick="showScreen('aboutScreen')">ℹ️️ Tentang</button>
+            </div>
+        </section>
+
+        <!-- 3. HALAMAN MATERI (VIEWER UTAMA MATERI) -->
+        <section id="materialScreen" class="screen">
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h2 id="materialTitle" style="color: var(--primary);">Judul Topik</h2>
+                    <button class="btn btn-outline" onclick="showScreen('dashboardScreen')" style="padding: 5px 12px; font-size: 0.85rem;">🏠 Dashboard</button>
+                </div>
+
+                <!-- Sub-material tabs -->
+                <div class="submaterial-nav" id="submatNav"></div>
+
+                <!-- Sub-material Content Box -->
+                <div id="materialContent" style="margin-top: 1rem; min-height: 250px;">
+                    <!-- Diisi JavaScript secara dinamis -->
+                </div>
+
+                <div class="nav-actions">
+                    <button class="btn btn-outline" id="btnPrevSub" onclick="navigateSubmat(-1)">⬅️️ Sebelumnya</button>
+                    <button class="btn" id="btnNextSub" onclick="navigateSubmat(1)">Berikutnya ➡️</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. HALAMAN AKTIVITAS BELAJAR -->
+        <section id="activityScreen" class="screen">
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h2 style="color: var(--primary);">🎮 Aktivitas Belajar Interaktif</h2>
+                    <button class="btn btn-outline" onclick="showScreen('dashboardScreen')" style="padding: 5px 12px;">🏠 Dashboard</button>
+                </div>
+
+                <p style="margin-bottom: 1.2rem; color: var(--text-muted);">Pilihlah salah satu aktivitas untuk melatih pemahamanmu secara langsung!</p>
+
+                <!-- Aktivitas 1: Urutkan Bilangan -->
+                <div class="interactive-box">
+                    <h3 style="color: var(--primary);">1. 🔢 Susun Bilangan (Terkecil ke Terbesar)</h3>
+                    <p style="font-size: 0.95rem; margin-top: 5px;">Urutan manakah yang benar dari terkecil ke terbesar?</p>
+                    <p style="font-weight: 800; margin: 8px 0;">Angka: 3.450, 1.250, 4.100, 2.300</p>
+                    <div class="option-grid">
+                        <button class="option-btn" onclick="checkActivity(1, false, 'act1Msg')">1.250 → 3.450 → 2.300 → 4.100</button>
+                        <button class="option-btn" onclick="checkActivity(1, true, 'act1Msg')">1.250 → 2.300 → 3.450 → 4.100</button>
+                        <button class="option-btn" onclick="checkActivity(1, false, 'act1Msg')">4.100 → 3.450 → 2.300 → 1.250</button>
+                    </div>
+                    <div id="act1Msg" class="feedback-msg"></div>
+                </div>
+
+                <!-- Aktivitas 2: Isi Kotak Aljabar -->
+                <div class="interactive-box">
+                    <h3 style="color: var(--primary);">2. ➕ Isi Kotak Kosong (Aljabar)</h3>
+                    <p style="font-size: 0.95rem; margin-top: 5px;">Berapakah nilai Kotak (□) agar kalimat matematika ini benar?</p>
+                    <p style="font-weight: 800; font-size: 1.2rem; margin: 8px 0;">□ + 15 = 45</p>
+                    <div class="option-grid">
+                        <button class="option-btn" onclick="checkActivity(2, false, 'act2Msg')">15</button>
+                        <button class="option-btn" onclick="checkActivity(2, true, 'act2Msg')">30</button>
+                        <button class="option-btn" onclick="checkActivity(2, false, 'act2Msg')">60</button>
+                    </div>
+                    <div id="act2Msg" class="feedback-msg"></div>
+                </div>
+
+                <!-- Aktivitas 3: Pembacaan Alat Ukur -->
+                <div class="interactive-box">
+                    <h3 style="color: var(--primary);">3. 📏 Tebak Alat Ukur Panjang & Berat</h3>
+                    <p style="font-size: 0.95rem; margin-top: 5px;">Alat manakah yang paling tepat digunakan untuk mengukur panjang meja kelas?</p>
+                    <div class="option-grid">
+                        <button class="option-btn" onclick="checkActivity(3, false, 'act3Msg')">Timbangan Badan</button>
+                        <button class="option-btn" onclick="checkActivity(3, true, 'act3Msg')">Penggaris / Meteran</button>
+                        <button class="option-btn" onclick="checkActivity(3, false, 'act3Msg')">Jam Dinding</button>
+                    </div>
+                    <div id="act3Msg" class="feedback-msg"></div>
+                </div>
+
+                <!-- Aktivitas 4: Ciri Bangun Datar -->
+                <div class="interactive-box">
+                    <h3 style="color: var(--primary);">4. 🔷 Tebak Bangun Datar</h3>
+                    <p style="font-size: 0.95rem; margin-top: 5px;">"Aku adalah segiempat. Semua 4 sisiku sama panjang dan keempat sudutku siku-siku. Siapakah aku?"</p>
+                    <div class="option-grid">
+                        <button class="option-btn" onclick="checkActivity(4, true, 'act4Msg')">Persegi</button>
+                        <button class="option-btn" onclick="checkActivity(4, false, 'act4Msg')">Jajargenjang</button>
+                        <button class="option-btn" onclick="checkActivity(4, false, 'act4Msg')">Segitiga Sama Sisi</button>
+                    </div>
+                    <div id="act4Msg" class="feedback-msg"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. HALAMAN KUIS -->
+        <section id="quizScreen" class="screen">
+            <div class="card">
+                <div class="quiz-header">
+                    <div>
+                        <h2 style="color: var(--primary);">📝 Kuis Matematika Kelas IV</h2>
+                        <span style="font-size: 0.85rem; color: var(--text-muted);">Pilihlah satu jawaban yang paling tepat!</span>
+                    </div>
+                    <div class="quiz-progress-badge" id="quizCounter">Soal 1 / 15</div>
+                </div>
+
+                <div id="quizQuestionBox" style="margin-top: 1rem;">
+                    <p id="quizQuestionText" style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">
+                        Teks soal akan diisi dinamis...
+                    </p>
+                    <div class="quiz-option-list" id="quizOptionsContainer">
+                        <!-- Pilihan A, B, C, D diisi JS -->
+                    </div>
+                </div>
+
+                <div class="nav-actions">
+                    <button class="btn btn-outline" id="btnQuizPrev" onclick="navigateQuiz(-1)" style="display:none;">⬅️ Sebelumnya</button>
+                    <button class="btn btn-success" id="btnQuizNext" onclick="navigateQuiz(1)" style="margin-left: auto;">Berikutnya ➡️</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. HALAMAN HASIL BELAJAR -->
+        <section id="resultScreen" class="screen">
+            <div class="card result-box">
+                <h2 style="color: var(--primary);">🏆 Hasil Belajar Kamu</h2>
+                <p id="resultStudentInfo" style="color: var(--text-muted); margin-top: 5px;">Nama Siswa - Kelas</p>
+
+                <div class="score-circle">
+                    <span style="font-size: 0.8rem; font-weight: 600;">NILAI</span>
+                    <span class="score-number" id="resultScore">0</span>
+                </div>
+
+                <h3 id="resultPredicate" style="color: var(--secondary); margin-bottom: 1rem;">Sangat Baik! 🌟</h3>
+
+                <div class="result-stats">
+                    <div class="stat-card" style="border-left: 5px solid var(--success);">
+                        <div style="color: var(--success); font-size: 1.4rem;">✓</div>
+                        <div>Jawaban Benar: <span id="resultCorrect">0</span> / 15</div>
+                    </div>
+                    <div class="stat-card" style="border-left: 5px solid var(--danger);">
+                        <div style="color: var(--danger); font-size: 1.4rem;">✗</div>
+                        <div>Jawaban Salah: <span id="resultWrong">0</span> / 15</div>
+                    </div>
+                </div>
+
+                <div class="nav-actions" style="justify-content: center; flex-wrap: wrap;">
+                    <button class="btn btn-secondary" onclick="showScreen('discussionScreen')">📖 Lihat Pembahasan</button>
+                    <button class="btn btn-warning" onclick="startQuiz()">🔄 Ulangi Kuis</button>
+                    <button class="btn btn-outline" onclick="showScreen('dashboardScreen')">🏠 Dashboard</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. HALAMAN PEMBAHASAN SOAL -->
+        <section id="discussionScreen" class="screen">
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h2 style="color: var(--primary);">📖 Pembahasan Soal Kuis</h2>
+                    <button class="btn btn-outline" onclick="showScreen('resultScreen')" style="padding: 5px 12px;">🏆 Kembali Ke Hasil</button>
+                </div>
+
+                <div id="discussionContainer">
+                    <!-- Pembahasan 15 Soal diisi secara dinamis -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. HALAMAN PETUNJUK -->
+        <section id="guideScreen" class="screen">
+            <div class="card">
+                <h2 style="color: var(--primary); margin-bottom: 1rem;">💡 Petunjuk Pengguna Media</h2>
+                <ol style="line-height: 1.8; padding-left: 1.2rem; color: var(--text-color);">
+                    <li><strong>Login:</strong> Masukkan namamu dan kelas terlebih dahulu pada halaman awal.</li>
+                    <li><strong>Dashboard:</strong> Pilih materi yang ingin dipelajari (Bilangan, Aljabar, Pengukuran, Geometri).</li>
+                    <li><strong>Materi & Aktivitas:</strong> Baca penjelasan ringkas, pelajari contoh visual, dan jawab latihan soal interaktif langsung untuk menguji pemahamanmu.</li>
+                    <li><strong>Kuis:</strong> Pilihlah jawaban paling tepat pada 15 soal kuis bertingkat. Nilai akan dihitung secara otomatis setelah seluruh soal dijawab.</li>
+                    <li><strong>Hasil Belajar:</strong> Kamu dapat melihat nilai akhir, jawaban benar, jawaban salah, dan membaca pembahasan setiap soal secara mendalam.</li>
+                </ol>
+                <div style="margin-top: 1.5rem;">
+                    <button class="btn btn-outline" onclick="showScreen('dashboardScreen')">⬅️ Kembali ke Dashboard</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. HALAMAN TENTANG MEDIA -->
+        <section id="aboutScreen" class="screen">
+            <div class="card">
+                <h2 style="color: var(--primary); margin-bottom: 1rem;">ℹ️ Tentang Media Pembelajaran</h2>
+                <p style="line-height: 1.6; margin-bottom: 1rem;">
+                    Media Pembelajaran Web Interaktif <strong>"Petualangan Matematika Kelas IV"</strong> dirancang khusus berdasarkan Capaian Pembelajaran Kurikulum Matematika SD/MI (Siswa Usia 9-10 Tahun).
+                </p>
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 12px; line-height: 1.8; font-size: 0.95rem;">
+                    <p><strong>Materi Utama:</strong> Bilangan Cacah ≤ 10.000, Aljabar Sederhana, Pengukuran (Panjang/Berat), & Geometri Bangun Datar.</p>
+                    <p><strong>Pengembang:</strong> Tim Pengembang Media Matematika SD/MI</p>
+                    <p><strong>Institusi / Sekolah:</strong> SD / MI Indonesia</p>
+                    <p><strong>Tahun Pengembangan:</strong> 2026</p>
+                    <p><strong>Teknologi:</strong> Pure HTML5, CSS3, & JavaScript Vanilla (Tanpa server/database eksternal, mendukung offline/localStorage).</p>
+                </div>
+                <div style="margin-top: 1.5rem;">
+                    <button class="btn btn-outline" onclick="showScreen('dashboardScreen')">⬅️️ Kembali ke Dashboard</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER APLIKASI -->
+    <footer class="app-footer">
+        Petualangan Matematika Kelas IV SD/MI &copy; 2026 — Media Pembelajaran Interaktif.
+    </footer>
+
+    <!-- === LOGIKA JAVASCRIPT APLIKASI (VANILLA JS) === -->
+    <script>
+        /* === DATA MATERI LENGKAP === */
+        const materialsData = {
+            bilangan: {
+                title: "🔢 Materi 1: Bilangan Cacah s.d. 10.000",
+                subtopics: [
+                    {
+                        title: "A. Mengenal Bilangan Cacah",
+                        content: `
+                            <h3>Mengenal Bilangan Cacah sampai 10.000</h3>
+                            <p style="margin: 10px 0;">Bilangan cacah adalah bilangan bulat yang dimulai dari 0 (0, 1, 2, 3, 4, ... dst).</p>
+                            <div class="interactive-box">
+                                <strong>Contoh Bilangan Cacah Kelas IV:</strong>
+                                <ul style="margin-left: 20px; margin-top: 5px;">
+                                    <li>125 (Ratusan)</li>
+                                    <li>1.250 (Ribuan)</li>
+                                    <li>5.678 (Ribuan)</li>
+                                    <li><strong>10.000 (Puluh Ribuan)</strong></li>
+                                </ul>
+                            </div>
+                            <p><strong>Tahukah Kamu?</strong> 10.000 dibaca <em>"sepuluh ribu"</em> dan memiliki 4 angka nol!</p>
+                        `
+                    },
+                    {
+                        title: "B. Membaca & Menulis Bilangan",
+                        content: `
+                            <h3>Membaca dan Menulis Bilangan</h3>
+                            <p>Mari kita pelajari cara membaca bilangan 4 angka:</p>
+                            <div class="interactive-box">
+                                <ul>
+                                    <li><strong>1.245</strong> = Seribu dua ratus empat puluh lima</li>
+                                    <li><strong>3.500</strong> = Tiga ribu lima ratus</li>
+                                    <li><strong>7.025</strong> = Tujuh ribu dua puluh lima</li>
+                                </ul>
+                            </div>
+                            <div class="interactive-box">
+                                <p><strong>Latihan Kecil:</strong> Bagaimana cara membaca <strong>4.325</strong>?</p>
+                                <div class="option-grid">
+                                    <button class="option-btn" onclick="checkSubQuiz(this, true, 'Empat ribu tiga ratus dua puluh lima!')">Empat ribu tiga ratus dua puluh lima</button>
+                                    <button class="option-btn" onclick="checkSubQuiz(this, false, 'Salah. Angka 3 bernilai ratusan!')">Empat ribu tiga puluh dua lima</button>
+                                </div>
+                                <div class="feedback-msg"></div>
+                            </div>
+                        `
+                    },
+                    {
+                        title: "C. Nilai Tempat & Nilai Angka",
+                        content: `
+                            <h3>Nilai Tempat vs Nilai Angka</h3>
+                            <p>Perhatikan susunan nilai tempat pada bilangan <strong>3.582</strong>:</p>
+                            <table class="place-value-table">
+                                <tr>
+                                    <th>Ribuan</th>
+                                    <th>Ratusan</th>
+                                    <th>Puluhan</th>
+                                    <th>Satuan</th>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>5</td>
+                                    <td>8</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>3.000</td>
+                                    <td>500</td>
+                                    <td>80</td>
+                                    <td>2</td>
+                                </tr>
+                            </table>
+                            <p style="margin-top: 10px;"><em>Catatan Penting:</em> Pada bilangan <strong>4.725</strong>, tempat angka 7 adalah <strong>Ratusan</strong>, sedangkan nilai angkanya adalah <strong>700</strong>.</p>
+                        `
+                    },
+                    {
+                        title: "D. Membandingkan & Mengurutkan",
+                        content: `
+                            <h3>Membandingkan & Mengurutkan Bilangan</h3>
+                            <p>Gunakan simbol perbandingan:</p>
+                            <p style="text-align: center; font-size: 1.2rem; font-weight: bold; margin: 10px 0;">
+                                &gt; (Lebih Dari) &nbsp;&nbsp;|&nbsp;&nbsp; &lt; (Kurang Dari) &nbsp;&nbsp;|&nbsp;&nbsp; = (Sama Dengan)
+                            </p>
+                            <div class="interactive-box">
+                                <p><strong>Contoh:</strong> 3.450 &gt; 3.405 (karena 3.450 lebih besar daripada 3.405).</p>
+                                <hr style="margin: 10px 0;">
+                                <p><strong>Mengurutkan Bilangan dari Terkecil:</strong></p>
+                                <p>Data: 2.350, 1.250, 3.500, 2.100</p>
+                                <p>Urutan: <strong>1.250 → 2.100 → 2.350 → 3.500</strong></p>
+                            </div>
+                        `
+                    }
+                ]
+            },
+            aljabar: {
+                title: "➕ Materi 2: Aljabar Sederhana",
+                subtopics: [
+                    {
+                        title: "A. Nilai yang Belum Diketahui (□)",
+                        content: `
+                            <h3>Mengenal Simbol Nilai Kosong (□)</h3>
+                            <p>Dalam aljabar sederhana, kita menggunakan simbol kotak <strong>□</strong> untuk mewakili angka yang belum diketahui nilainya.</p>
+                            <div class="interactive-box" style="text-align: center;">
+                                <p style="font-size: 1.3rem; font-weight: bold;">□ + 5 = 12</p>
+                                <p style="margin-top: 8px;">Untuk mencari kotak, kita hitung: <strong>12 - 5 = 7</strong></p>
+                                <p style="color: var(--success); font-weight: bold;">Jadi, nilai □ = 7</p>
+                            </div>
+                        `
+                    },
+                    {
+                        title: "B. Kalimat Matematika Penjumlahan",
+                        content: `
+                            <h3>Variasi Kalimat Matematika Penjumlahan</h3>
+                            <p>Perhatikan contoh-contoh berikut ini:</p>
+                            <div class="interactive-box">
+                                <ul>
+                                    <li>5 + □ = 12 &nbsp;&rarr;&nbsp; □ = 12 - 5 = <strong>7</strong></li>
+                                    <li>□ + 8 = 20 &nbsp;&rarr;&nbsp; □ = 20 - 8 = <strong>12</strong></li>
+                                    <li>15 + □ = 25 &nbsp;&rarr;&nbsp; □ = 25 - 15 = <strong>10</strong></li>
+                                </ul>
+                            </div>
+                        `
+                    },
+                    {
+                        title: "C. Penerapan dalam Pengukuran & Soal Cerita",
+                        content: `
+                            <h3>Aljabar dalam Situasi Sehari-hari</h3>
+                            <div class="interactive-box">
+                                <p><strong>Soal Cerita Pita Rani:</strong></p>
+                                <p>Panjang awal pita Rani adalah <strong>□ cm</strong>. Setelah disambung dengan pita 15 cm, panjang totalnya menjadi 40 cm.</p>
+                                <p style="font-weight: bold; margin-top: 5px;">Model Matematika: □ + 15 = 40</p>
+                                <p>Jawaban: □ = 40 - 15 = <strong>25 cm</strong>.</p>
+                            </div>
+                        `
+                    }
+                ]
+            },
+            pengukuran: {
+                title: "📏 Materi 3: Pengukuran Panjang & Berat",
+                subtopics: [
+                    {
+                        title: "A. Pengukuran Panjang & Alatnya",
+                        content: `
+                            <h3>Satuan Baku & Alat Ukur Panjang</h3>
+                            <p>Satuan baku panjang: <strong>mm, cm, m, km</strong>.</p>
+                            <div class="interactive-box">
+                                <p><strong>Contoh Alat Ukur Panjang:</strong></p>
+                                <ul>
+                                    <li><strong>Penggaris:</strong> Mengukur pensil / buku (cm)</li>
+                                    <li><strong>Meteran Pita / Gulung:</strong> Mengukur meja / pintu / lapangan (m)</li>
+                                </ul>
+                                <div class="css-ruler" style="margin-top: 15px;">
+                                    <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5 cm</span>
+                                </div>
+                            </div>
+                        `
+                    },
+                    {
+                        title: "B. Pengukuran Berat & Alatnya",
+                        content: `
+                            <h3>Satuan Baku & Alat Ukur Berat</h3>
+                            <p>Satuan baku berat yang sering digunakan: <strong>gram (g)</strong> dan <strong>kilogram (kg)</strong>.</p>
+                            <div class="interactive-box">
+                                <ul>
+                                    <li>Berat permen / apel &rarr; <strong>gram (g)</strong></li>
+                                    <li>Berat beras / buah semangka / berat badan &rarr; <strong>kilogram (kg)</strong></li>
+                                </ul>
+                                <div class="css-scale-balance">
+                                    <div class="scale-plate">Semangka<br>3 kg</div>
+                                    <div class="scale-plate">Apel<br>500 g</div>
+                                </div>
+                            </div>
+                        `
+                    }
+                ]
+            },
+            geometri: {
+                title: "🔷 Materi 4: Geometri Bangun Datar",
+                subtopics: [
+                    {
+                        title: "A. Segiempat & Ciri-cirinya",
+                        content: `
+                            <h3>Jenis-jenis Bangun Datar Segiempat</h3>
+                            <p>Segiempat adalah bangun datar yang memiliki 4 sisi dan 4 sudut.</p>
+                            <div class="shape-grid">
+                                <div class="shape-item">
+                                    <svg class="svg-shape" viewBox="0 0 100 100"><rect x="10" y="10" width="80" height="80" fill="#4e54c8" /></svg>
+                                    <strong>Persegi</strong>
+                                    <small>4 sisi sama panjang</small>
+                                </div>
+                                <div class="shape-item">
+                                    <svg class="svg-shape" viewBox="0 0 100 100"><rect x="5" y="25" width="90" height="50" fill="#ff9f43" /></svg>
+                                    <strong>Persegi Panjang</strong>
+                                    <small>Sisi berhadapan sama</small>
+                                </div>
+                                <div class="shape-item">
+                                    <svg class="svg-shape" viewBox="0 0 100 100"><polygon points="20,80 50,20 80,80" fill="#1dd1a1" /></svg>
+                                    <strong>Segitiga</strong>
+                                    <small>Memiliki 3 sisi</small>
+                                </div>
+                            </div>
+                        `
+                    },
+                    {
+                        title: "B. Segibanyak & Benda Sekitar",
+                        content: `
+                            <h3>Segibanyak & Bentuk Bangun di Sekitar Kita</h3>
+                            <p>Segibanyak adalah bangun datar tertutup yang dibatasi ruas garis lurus.</p>
+                            <div class="interactive-box">
+                                <ul>
+                                    <li><strong>Ubin / Keramik:</strong> Bentuk Persegi</li>
+                                    <li><strong>Pintu / Papan Tulis:</strong> Bentuk Persegi Panjang</li>
+                                    <li><strong>Atap Rumah / Rambu Traffic:</strong> Bentuk Segitiga</li>
+                                    <li><strong>Segilima (Pentagon):</strong> 5 Sisi | <strong>Segienam (Hexagon):</strong> 6 Sisi</li>
+                                </ul>
+                            </div>
+                        `
+                    }
+                ]
+            }
+        };
+
+        /* === DATA 15 SOAL KUIS MATEMATIKA KELAS IV (HOT & STANDAR SD/MI) === */
+        const quizQuestions = [
+            // 4 SOAL BILANGAN
+            {
+                id: 1,
+                topic: "Bilangan",
+                question: "Pada bilangan 4.725, angka 7 menempati nilai tempat ...",
+                options: ["Satuan", "Puluhan", "Ratusan", "Ribuan"],
+                answer: 2, // Index C (Ratusan)
+                discussion: "Pada bilangan 4.725: angka 4 = ribuan, 7 = ratusan, 2 = puluhan, 5 = satuan."
+            },
+            {
+                id: 2,
+                topic: "Bilangan",
+                question: "Lambang bilangan dari 'Tujuh ribu lima puluh empat' adalah ...",
+                options: ["7.504", "7.054", "7.540", "70.540"],
+                answer: 1, // Index B
+                discussion: "Tujuh ribu (7.000) + lima puluh empat (54) = 7.054."
+            },
+            {
+                id: 3,
+                topic: "Bilangan",
+                question: "Perpustakaan A memiliki 3.250 buku, sedangkan Perpustakaan B memiliki 3.205 buku. Pernyataan yang benar adalah ...",
+                options: ["Buku Perpustakaan A < Perpustakaan B", "Buku Perpustakaan A > Perpustakaan B", "Buku Perpustakaan A = Perpustakaan B", "Buku Perpustakaan A kurang dari Perpustakaan B"],
+                answer: 1, // Index B
+                discussion: "3.250 lebih besar daripada 3.205, sehingga simbol yang tepat adalah > (lebih besar)."
+            },
+            {
+                id: 4,
+                topic: "Bilangan (HOTS)",
+                question: "Urutan bilangan berikut dari yang terkecil ke terbesar: 2.400, 1.900, 3.100, 2.050 adalah ...",
+                options: ["1.900, 2.050, 2.400, 3.100", "1.900, 2.400, 2.050, 3.100", "3.100, 2.400, 2.050, 1.900", "2.050, 1.900, 2.400, 3.100"],
+                answer: 0, // Index A
+                discussion: "Membandingkan angka ribuan dan ratusannya dari yang terkecil: 1.900 → 2.050 → 2.400 → 3.100."
+            },
+
+            // 4 SOAL ALJABAR
+            {
+                id: 5,
+                topic: "Aljabar",
+                question: "Berapakah nilai yang belum diketahui (□) pada kalimat matematika: □ + 8 = 20?",
+                options: ["10", "12", "14", "28"],
+                answer: 1, // Index B
+                discussion: "□ = 20 - 8 = 12."
+            },
+            {
+                id: 6,
+                topic: "Aljabar",
+                question: "Rani mempunyai beberapa pensil. Setelah ia membeli 5 pensil lagi, jumlah pensilnya menjadi 14. Banyak pensil Rani sebelumnya adalah ...",
+                options: ["8", "9", "10", "19"],
+                answer: 1, // Index B
+                discussion: "Model matematika: □ + 5 = 14. Maka □ = 14 - 5 = 9 pensil."
+            },
+            {
+                id: 7,
+                topic: "Aljabar",
+                question: "Panjang pita Rani adalah □ cm. Setelah disambung dengan pita sepanjang 15 cm, total panjangnya menjadi 45 cm. Nilai □ adalah ...",
+                options: ["20 cm", "25 cm", "30 cm", "60 cm"],
+                answer: 2, // Index C
+                discussion: "□ + 15 = 45. Maka □ = 45 - 15 = 30 cm."
+            },
+            {
+                id: 8,
+                topic: "Aljabar (HOTS)",
+                question: "Beni memiliki kelereng. Setelah diberi 12 kelereng oleh kakaknya, kelereng Beni menjadi 30. Kalimat matematika dan jawaban yang benar adalah ...",
+                options: ["□ - 12 = 30, jawabannya 42", "□ + 12 = 30, jawabannya 18", "12 + 30 = □, jawabannya 42", "□ + 30 = 12, jawabannya 18"],
+                answer: 1, // Index B
+                discussion: "Model matematika yang benar adalah □ + 12 = 30, sehingga □ = 30 - 12 = 18."
+            },
+
+            // 3 SOAL PENGUKURAN
+            {
+                id: 9,
+                topic: "Pengukuran",
+                question: "Alat ukur yang paling tepat digunakan untuk mengukur panjang meja belajar adalah ...",
+                options: ["Timbangan dapur", "Jam tangan", "Penggaris / Meteran", "Gelas ukur"],
+                answer: 2, // Index C
+                discussion: "Panjang meja diukur menggunakan satuan baku panjang seperti penggaris atau meteran."
+            },
+            {
+                id: 10,
+                topic: "Pengukuran",
+                question: "Ibu membeli sebuah semangka di pasar. Satuan berat yang paling tepat untuk mengukur berat semangka adalah ...",
+                options: ["Meter (m)", "Kilogram (kg)", "Centimeter (cm)", "Liter (l)"],
+                answer: 1, // Index B
+                discussion: "Semangka adalah benda yang cukup berat sehingga diukur dengan satuan baku kilogram (kg)."
+            },
+            {
+                id: 11,
+                topic: "Pengukuran (HOTS)",
+                question: "Pensil A memiliki panjang 12 cm. Pensil B memiliki panjang 18 cm. Selisih panjang kedua pensil tersebut adalah ...",
+                options: ["5 cm", "6 cm", "30 cm", "24 cm"],
+                answer: 1, // Index B
+                discussion: "Selisih panjang = 18 cm - 12 cm = 6 cm."
+            },
+
+            // 4 SOAL GEOMETRI
+            {
+                id: 12,
+                topic: "Geometri",
+                question: "Bangun datar segiempat yang memiliki 4 sisi sama panjang dan 4 sudut siku-siku adalah ...",
+                options: ["Persegi Panjang", "Jajargenjang", "Persegi", "Trapesium"],
+                answer: 2, // Index C
+                discussion: "Ciri khas utama bangun persegi adalah keempat sisinya sama panjang dan semua sudutnya siku-siku."
+            },
+            {
+                id: 13,
+                topic: "Geometri",
+                question: "Jumlah sisi dan sudut yang dimiliki oleh sebuah bangun segitiga adalah ...",
+                options: ["3 sisi dan 3 sudut", "4 sisi dan 4 sudut", "3 sisi dan 4 sudut", "5 sisi dan 5 sudut"],
+                answer: 0, // Index A
+                discussion: "Segitiga adalah bangun datar yang memiliki 3 buah sisi dan 3 buah sudut."
+            },
+            {
+                id: 14,
+                topic: "Geometri",
+                question: "Benda di sekitar kita yang umumnya berbentuk persegi panjang adalah ...",
+                options: ["Ubin lantai", "Atap rumah", "Pintu rumah", "Rambu lalu lintas segitiga"],
+                answer: 2, // Index C
+                discussion: "Pintu rumah memiliki dua pasang sisi sejajar dengan ukuran berbeda (panjang & lebar) sehingga berbentuk persegi panjang."
+            },
+            {
+                id: 15,
+                topic: "Geometri (HOTS)",
+                question: "Budi menemukan bangun datar yang memiliki 5 buah sisi dan 5 buah sudut. Bangun datar tersebut dinamakan ...",
+                options: ["Segiempat", "Segilima (Pentagon)", "Segienam (Hexagon)", "Segitiga"],
+                answer: 1, // Index B
+                discussion: "Bangun datar yang dibatasi oleh 5 buah sisi lurus disebut segilima (pentagon)."
+            }
+        ];
+
+        /* === STATE APLIKASI === */
+        let currentUser = { name: '', className: '' };
+        let currentTopicKey = 'bilangan';
+        let currentSubmatIndex = 0;
+        let currentQuizIndex = 0;
+        let userQuizAnswers = new Array(quizQuestions.length).fill(null);
+
+        /* === INISIALISASI SAAT HALAMAN DIMUAT === */
+        window.onload = function() {
+            loadUserData();
+            updateProgressBar();
+        };
+
+        function loadUserData() {
+            const savedName = localStorage.getItem('studentName');
+            const savedClass = localStorage.getItem('studentClass');
+
+            if (savedName && savedClass) {
+                currentUser.name = savedName;
+                currentUser.className = savedClass;
+                document.getElementById('userBadge').innerText = `Siswa: ${savedName} (${savedClass})`;
+                document.getElementById('welcomeText').innerText = `Halo, ${savedName}! 👋`;
+                showScreen('dashboardScreen');
+            } else {
+                showScreen('loginScreen');
+            }
+        }
+
+        /* === NAVIGASI SCREEN === */
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            const targetScreen = document.getElementById(screenId);
+            if (targetScreen) {
+                targetScreen.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        /* === LOGIN HANDLER === */
+        function handleLogin(e) {
+            e.preventDefault();
+            const nameInput = document.getElementById('studentName').value.trim();
+            const classInput = document.getElementById('studentClass').value.trim();
+
+            if (nameInput && classInput) {
+                currentUser.name = nameInput;
+                currentUser.className = classInput;
+
+                localStorage.setItem('studentName', nameInput);
+                localStorage.setItem('studentClass', classInput);
+
+                document.getElementById('userBadge').innerText = `Siswa: ${nameInput} (${classInput})`;
+                document.getElementById('welcomeText').innerText = `Halo, ${nameInput}! 👋`;
+
+                showScreen('dashboardScreen');
+            }
+        }
+
+        /* === NAVIGASI MATERI === */
+        function openTopic(topicKey) {
+            currentTopicKey = topicKey;
+            currentSubmatIndex = 0;
+            renderMaterialView();
+            showScreen('materialScreen');
+            updateProgressBar();
+        }
+
+        function renderMaterialView() {
+            const topicData = materialsData[currentTopicKey];
+            document.getElementById('materialTitle').innerText = topicData.title;
+
+            // Render Navigasi Sub-materi
+            const submatNav = document.getElementById('submatNav');
+            submatNav.innerHTML = '';
+            topicData.subtopics.forEach((sub, index) => {
+                const btn = document.createElement('button');
+                btn.className = `submat-btn ${index === currentSubmatIndex ? 'active' : ''}`;
+                btn.innerText = sub.title;
+                btn.onclick = () => {
+                    currentSubmatIndex = index;
+                    renderMaterialView();
+                };
+                submatNav.appendChild(btn);
+            });
+
+            // Render Konten Sub-materi
+            const activeSub = topicData.subtopics[currentSubmatIndex];
+            document.getElementById('materialContent').innerHTML = activeSub.content;
+
+            // Navigasi Tombol Prev / Next
+            document.getElementById('btnPrevSub').style.visibility = currentSubmatIndex > 0 ? 'visible' : 'hidden';
+            
+            const isLast = currentSubmatIndex === topicData.subtopics.length - 1;
+            document.getElementById('btnNextSub').innerText = isLast ? 'Selesai Topik 🏁' : 'Berikutnya ➡️';
+        }
+
+        function navigateSubmat(direction) {
+            const topicData = materialsData[currentTopicKey];
+            const newIndex = currentSubmatIndex + direction;
+
+            if (newIndex >= 0 && newIndex < topicData.subtopics.length) {
+                currentSubmatIndex = newIndex;
+                renderMaterialView();
+            } else if (newIndex >= topicData.subtopics.length) {
+                showScreen('dashboardScreen');
+            }
+        }
+
+        /* === INTERAKTIF SUB-MATERI CHECKER === */
+        function checkSubQuiz(btnElement, isCorrect, msg) {
+            const parent = btnElement.closest('.interactive-box');
+            const feedbackBox = parent.querySelector('.feedback-msg');
+            
+            if (isCorrect) {
+                feedbackBox.className = "feedback-msg correct";
+                feedbackBox.innerHTML = "🎉 " + msg;
+            } else {
+                feedbackBox.className = "feedback-msg wrong";
+                feedbackBox.innerHTML = "💡 " + msg;
+            }
+        }
+
+        function checkActivity(actId, isCorrect, feedbackId) {
+            const fb = document.getElementById(feedbackId);
+            if (isCorrect) {
+                fb.className = "feedback-msg correct";
+                fb.innerHTML = "🎉 Hebataat! Jawabanmu tepat sekali!";
+            } else {
+                fb.className = "feedback-msg wrong";
+                fb.innerHTML = "Yuk, perhatikan dan coba pikirkan kembali cirinya!";
+            }
+        }
+
+        /* === KUIS ENGINE === */
+        function startQuiz() {
+            currentQuizIndex = 0;
+            userQuizAnswers = new Array(quizQuestions.length).fill(null);
+            renderQuizQuestion();
+            showScreen('quizScreen');
+        }
+
+        function renderQuizQuestion() {
+            const q = quizQuestions[currentQuizIndex];
+            document.getElementById('quizCounter').innerText = `Soal ${currentQuizIndex + 1} / ${quizQuestions.length}`;
+            document.getElementById('quizQuestionText').innerText = `${currentQuizIndex + 1}. ${q.question}`;
+
+            const container = document.getElementById('quizOptionsContainer');
+            container.innerHTML = '';
+
+            const letters = ['A', 'B', 'C', 'D'];
+            q.options.forEach((opt, idx) => {
+                const optDiv = document.createElement('div');
+                optDiv.className = `quiz-option ${userQuizAnswers[currentQuizIndex] === idx ? 'selected' : ''}`;
+                optDiv.onclick = () => selectQuizOption(idx);
+
+                optDiv.innerHTML = `
+                    <div class="opt-letter">${letters[idx]}</div>
+                    <div>${opt}</div>
+                `;
+                container.appendChild(optDiv);
+            });
+
+            // Tombol Navigasi
+            document.getElementById('btnQuizPrev').style.display = currentQuizIndex > 0 ? 'inline-flex' : 'none';
+            const isLast = currentQuizIndex === quizQuestions.length - 1;
+            document.getElementById('btnQuizNext').innerText = isLast ? 'Selesai & Hitung Nilai 🏆' : 'Berikutnya ➡️';
+        }
+
+        function selectQuizOption(optionIndex) {
+            userQuizAnswers[currentQuizIndex] = optionIndex;
+            renderQuizQuestion();
+        }
+
+        function navigateQuiz(direction) {
+            if (direction === 1 && userQuizAnswers[currentQuizIndex] === null) {
+                alert('Pilihlah salah satu jawaban terlebih dahulu sebelum melanjutkan!');
+                return;
+            }
+
+            const newIndex = currentQuizIndex + direction;
+            if (newIndex >= 0 && newIndex < quizQuestions.length) {
+                currentQuizIndex = newIndex;
+                renderQuizQuestion();
+            } else if (newIndex >= quizQuestions.length) {
+                finishQuiz();
+            }
+        }
+
+        /* === PERHITUNGAN SKOR & HASIL BELAJAR === */
+        function finishQuiz() {
+            let correctCount = 0;
+            quizQuestions.forEach((q, idx) => {
+                if (userQuizAnswers[idx] === q.answer) {
+                    correctCount++;
+                }
+            });
+
+            const wrongCount = quizQuestions.length - correctCount;
+            const finalScore = Math.round((correctCount / quizQuestions.length) * 100);
+
+            // Simpan ke LocalStorage
+            localStorage.setItem('quizScore', finalScore);
+            localStorage.setItem('correctAnswers', correctCount);
+            localStorage.setItem('wrongAnswers', wrongCount);
+            localStorage.setItem('quizCompleted', 'true');
+
+            // Render Tampilan Hasil
+            document.getElementById('resultStudentInfo').innerText = `${currentUser.name} — ${currentUser.className}`;
+            document.getElementById('resultScore').innerText = finalScore;
+            document.getElementById('resultCorrect').innerText = correctCount;
+            document.getElementById('resultWrong').innerText = wrongCount;
+
+            // Predikat
+            const predEl = document.getElementById('resultPredicate');
+            if (finalScore >= 86) {
+                predEl.innerText = "Sangat Baik! 🌟 Luar Biasa!";
+                predEl.style.color = "var(--success)";
+            } else if (finalScore >= 76) {
+                predEl.innerText = "Baik! 👍 Tingkatkan Lagi!";
+                predEl.style.color = "var(--primary)";
+            } else if (finalScore >= 60) {
+                predEl.innerText = "Cukup. Yuk, belajar lagi! 💪";
+                predEl.style.color = "var(--warning)";
+            } else {
+                predEl.innerText = "Ayo pelajari kembali materinya! 📚";
+                predEl.style.color = "var(--danger)";
+            }
+
+            renderDiscussion();
+            updateProgressBar();
+            showScreen('resultScreen');
+        }
+
+        /* === RENDER PEMBAHASAN SOAL === */
+        function renderDiscussion() {
+            const container = document.getElementById('discussionContainer');
+            container.innerHTML = '';
+
+            const letters = ['A', 'B', 'C', 'D'];
+
+            quizQuestions.forEach((q, idx) => {
+                const userAnsIndex = userQuizAnswers[idx];
+                const isCorrect = userAnsIndex === q.answer;
+
+                const item = document.createElement('div');
+                item.className = 'discussion-item';
+
+                item.innerHTML = `
+                    <span class="status-badge ${isCorrect ? 'badge-success' : 'badge-danger'}">
+                        ${isCorrect ? '✓ Jawaban Benar' : '✗ Jawaban Salah'}
+                    </span>
+                    <p style="font-weight: 700; margin: 5px 0;">Soal ${idx + 1} (${q.topic}): ${q.question}</p>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">
+                        Jawabanmu: <strong style="color: ${isCorrect ? 'var(--success)' : 'var(--danger)'}">
+                            ${userAnsIndex !== null ? letters[userAnsIndex] + '. ' + q.options[userAnsIndex] : 'Tidak dijawab'}
+                        </strong>
+                    </p>
+                    <p style="font-size: 0.9rem; color: var(--success);">
+                        Jawaban Tepat: <strong>${letters[q.answer]}. ${q.options[q.answer]}</strong>
+                    </p>
+                    <div style="background: #f8f9fa; padding: 8px 12px; border-radius: 8px; font-size: 0.88rem; margin-top: 6px;">
+                        💡 <strong>Pembahasan:</strong> ${q.discussion}
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        /* === PROGRESS BAR UPDATE === */
+        function updateProgressBar() {
+            const isQuizCompleted = localStorage.getItem('quizCompleted') === 'true';
+            let progress = 25; // Default dasar setelah membaca dashboard
+            if (isQuizCompleted) {
+                progress = 100;
+            }
+
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('progressText').innerText = progress + '%';
+        }
+    </script>
+</body>
+</html>
